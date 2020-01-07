@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import '../App.css';
-import { functionTypeAnnotation } from '@babel/types';
 
 // redux store: store is global object that the appication state, it allow a state to be updated
 //by dispatch action
