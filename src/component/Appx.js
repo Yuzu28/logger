@@ -1,27 +1,25 @@
 import React, {Component} from 'react';
 import '../App.css';
+import { connect } from 'react-redux';
+//The connect() function connects a React component to a Redux store.
 
-// redux store: store is global object that the appication state, it allow a state to be updated
-//by dispatch action
-
-//action are just plain javascript objects, action creator are more like a function
-//must have
-
-// function() {
-//     return {
-//         type: 'ADD_REMINDER',
-//         payload: {}
-//     }
-
-// }
-
-
-
-
-
+import { addReminder } from '../actions/index';
+import { bindActionCreators} from 'redux';
 
 
 class Appx extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            text: ''
+        }
+    }
+
+
+    addReminder(){
+        // console.log('this', this);
+        this.props.addReminder(this.state.text);
+    }
     render(){
         return (
             <div className="App">
@@ -31,11 +29,21 @@ class Appx extends Component{
 
                 <div className="form-inline">
                     <div className="form-group">
-                        <input className="form-control" placeholder="I have to..." />
+                        <input className="form-control" 
+                        placeholder="I have to..."
+                        onChange={event => this.setState({text: event.target.value})}
+
+                        
+    
+                        />
                     
                     </div>
 
-                    <button type="button" className="btn btn-success"> Add Reminder
+                    <button 
+                        type="button" 
+                        className="btn btn-success" 
+                        onClick={() => this.addReminder()}> 
+                        Add Reminder
 
 
 
@@ -49,4 +57,10 @@ class Appx extends Component{
     }
 }
 
-export default Appx
+// function mapDispatchToProps(dispatch){
+//     return bindActionCreators({addReminder}, dispatch)
+
+// }
+// export default connect(null, mapDispatchToProps)(Appx);
+
+export default connect(null, {addReminder})(Appx);
