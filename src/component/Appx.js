@@ -21,6 +21,7 @@ class Appx extends Component{
         this.props.addReminder(this.state.text);
     }
     render(){
+        console.log('this.props', this.props)
         return (
             <div className="App">
                 <div className="title">
@@ -57,10 +58,19 @@ class Appx extends Component{
     }
 }
 
+//this is one way of doing it but don't really need to 
+
 // function mapDispatchToProps(dispatch){
 //     return bindActionCreators({addReminder}, dispatch)
 
 // }
 // export default connect(null, mapDispatchToProps)(Appx);
 
-export default connect(null, {addReminder})(Appx);
+function mapStateToProps(state){
+    // console.log('state', state);
+    return {
+        reminders: state
+    }
+}
+
+export default connect(mapStateToProps, {addReminder})(Appx);
